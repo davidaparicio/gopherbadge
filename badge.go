@@ -42,11 +42,7 @@ func Badge() {
 	}
 
 	for {
-		showLogoBin()
-		if quit {
-			break
-		}
-		logoPurpleHardware()
+		showLogoBin(YourName, YourTitleA1)
 		if quit {
 			break
 		}
@@ -54,19 +50,7 @@ func Badge() {
 		if quit {
 			break
 		}
-		blinkyRainbow(YourTitleA1, YourTitleA2)
-		if quit {
-			break
-		}
-		scroll(YourMarqueeTop, YourMarqueeMiddle, YourMarqueeBottom)
-		if quit {
-			break
-		}
 		QR(YourQRText)
-		if quit {
-			break
-		}
-		blinkyRainbow(YourTitleB1, YourTitleB2)
 		if quit {
 			break
 		}
@@ -85,22 +69,22 @@ func myNameIs(name string) {
 	display.FillRectangle(WIDTH-r, HEIGHT-r, r, r, colors[BLACK])
 
 	// round corners
-	tinydraw.FilledCircle(&display, r, r, r, colors[RED])
-	tinydraw.FilledCircle(&display, WIDTH-r-1, r, r, colors[RED])
-	tinydraw.FilledCircle(&display, r, HEIGHT-r-1, r, colors[RED])
-	tinydraw.FilledCircle(&display, WIDTH-r-1, HEIGHT-r-1, r, colors[RED])
+	tinydraw.FilledCircle(&display, r, r, r, colors[PURPLE])
+	tinydraw.FilledCircle(&display, WIDTH-r-1, r, r, colors[PURPLE])
+	tinydraw.FilledCircle(&display, r, HEIGHT-r-1, r, colors[PURPLE])
+	tinydraw.FilledCircle(&display, WIDTH-r-1, HEIGHT-r-1, r, colors[PURPLE])
 
 	// top band
-	display.FillRectangle(r, 0, WIDTH-2*r-1, r, colors[RED])
-	display.FillRectangle(0, r, WIDTH, 54, colors[RED])
+	display.FillRectangle(r, 0, WIDTH-2*r-1, r, colors[PURPLE])
+	display.FillRectangle(0, r, WIDTH, 54, colors[PURPLE])
 
 	// bottom band
-	display.FillRectangle(r, HEIGHT-r-1, WIDTH-2*r-1, r+1, colors[RED])
-	display.FillRectangle(0, HEIGHT-3*r-1, WIDTH, 2*r, colors[RED])
+	display.FillRectangle(r, HEIGHT-r-1, WIDTH-2*r-1, r+1, colors[PURPLE])
+	display.FillRectangle(0, HEIGHT-3*r-1, WIDTH, 2*r, colors[PURPLE])
 
 	// top text : my NAME is
-	w32, _ := tinyfont.LineWidth(&freesans.Bold18pt7b, "HELLO")
-	tinyfont.WriteLine(&display, &freesans.Bold18pt7b, (WIDTH-int16(w32))/2, 34, "HELLO", colors[WHITE])
+	w32, _ := tinyfont.LineWidth(&freesans.Bold18pt7b, "HELLO KUBECON")
+	tinyfont.WriteLine(&display, &freesans.Bold18pt7b, (WIDTH-int16(w32))/2, 34, "HELLO KUBECON", colors[WHITE])
 
 	w32, _ = tinyfont.LineWidth(&freesans.Oblique9pt7b, "my name is")
 	tinyfont.WriteLine(&display, &freesans.Oblique9pt7b, (WIDTH-int16(w32))/2, 54, "my name is", colors[WHITE])
@@ -325,7 +309,7 @@ func getRainbowRGB(i uint8) color.RGBA {
 	return color.RGBA{0, i * 3, 255 - i*3, 255}
 }
 
-func showLogoBin() {
+func showLogoBin(name string, title string) {
 	var row = []color.RGBA{}
 	row = make([]color.RGBA, WIDTH)
 	unsafeBadgeLogo := unsafe.Slice(unsafe.StringData(badgeLogo), len(badgeLogo))
@@ -347,6 +331,10 @@ func showLogoBin() {
 		}
 		display.FillRectangleWithBuffer(0, int16(i), WIDTH, 1, row)
 	}
+
+	tinyfont.WriteLine(&display, &freesans.Regular18pt7b, 35, 205, name, colors[WHITE])
+	tinyfont.WriteLine(&display, &freesans.Regular18pt7b, 100, 235, title, colors[WHITE])
+
 	time.Sleep(logoDisplayTime)
 	if !btnB.Get() {
 		quit = true

@@ -30,8 +30,13 @@ prepare-golab:
 
 flash-golab: prepare-golab perform-flash
 
+prepare-kubeconeu:
+	go run cmd/main.go -conf=kubeconeu
+
+flash-kubeconeu: prepare-kubeconeu perform-flash
+
 perform-flash:
 	tinygo flash -size short -target gopher-badge -ldflags="-X main.YourName='$(NAME)' \
 	-X main.YourTitleA1='$(TITLEA1)' -X main.YourTitleA2='$(TITLEA2)'  -X main.YourTitleB1='$(TITLEB1)' \
-	 -X main.YourTitleB2='$(TITLEB2)' -X main.YourMarqueeTop='$(MARQUEETOP)' -X main.YourMarqueeMiddle='$(MARQUEEMIDDLE)' \
-	 -X main.YourMarqueeBottom='$(MARQUEEBOTTOM)' -X main.YourQRText='$(QRTEXT)'" .
+	-X main.YourTitleB2='$(TITLEB2)' -X main.YourMarqueeTop='$(MARQUEETOP)' -X main.YourMarqueeMiddle='$(MARQUEEMIDDLE)' \
+	-X main.YourMarqueeBottom='$(MARQUEEBOTTOM)' -X main.YourQRText='$(QRTEXT)'" .

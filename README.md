@@ -43,6 +43,7 @@ make flash-gopherconus
 
 ```
 make flash-gopherconeu NAME="@_CONEJO" TITLEA1="Go compiler" TITLEA2="small places"
+make flash-kubeconeu NAME="David @dadideo" TITLEA1="DataOps" TITLEA2="OVHcloud" QRTEXT="https://davidaparicio.gitlab.io/"
 ```
 
 # Add an new logo

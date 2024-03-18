@@ -18,6 +18,7 @@ const (
 	golab              = "./cmd/assets/golab.jpg"
 	fosdem             = "./cmd/assets/fosdem.jpg"
 	fosdemgo           = "./cmd/assets/fosdemgo.jpg"
+	kubeconEU2024	   = "./cmd/assets/kubeconeu.jpg"
 )
 
 func main() {
@@ -56,5 +57,6 @@ func confs() map[string]string {
 		"golab":       golab,
 		"fosdem":      fosdem,
 		"fosdemgo":    fosdemgo,
+		"kubeconeu":   kubeconEU2024,
 	}
 }
